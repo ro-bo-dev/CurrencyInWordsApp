@@ -1,5 +1,5 @@
 # CurrencyInWordsApp
-currency into words converter as server-client application
+currency into words converter as server-client app
 
 Solution Structure
 - **CIWClientApp** user interface
