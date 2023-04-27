@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using System.Diagnostics;
 using CurrencyInWordsApp.CIWConverter.Currency;
 using System.Text.RegularExpressions;
 

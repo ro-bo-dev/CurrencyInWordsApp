@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Mime;
-using System.Security.Policy;
-using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CIWClientApp
@@ -26,7 +21,8 @@ namespace CIWClientApp
             }
             catch (Exception ex)
             {
-                //myCustomLogger.LogException(ex);
+                //TODO add proper logging
+                Console.WriteLine(ex.Message);
                 response = "server request failed";
             }
             return response;

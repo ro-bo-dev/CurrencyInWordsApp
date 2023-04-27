@@ -1,5 +1,4 @@
-﻿
-namespace CurrencyInWordsApp.CIWConverter.Currency
+﻿namespace CurrencyInWordsApp.CIWConverter.Currency
 {
     public interface ICurrency
     {
