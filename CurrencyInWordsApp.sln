@@ -12,6 +12,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CIWConverterTest", "CIWConv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CIWClientApp", "CIWClientApp\CIWClientApp.csproj", "{31B20527-4F0D-4A02-8832-6AB2885552C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIWServerApi", "CIWServerApi\CIWServerApi.csproj", "{51FD269A-FDE5-433D-AA47-603F54193DE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{31B20527-4F0D-4A02-8832-6AB2885552C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31B20527-4F0D-4A02-8832-6AB2885552C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31B20527-4F0D-4A02-8832-6AB2885552C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51FD269A-FDE5-433D-AA47-603F54193DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51FD269A-FDE5-433D-AA47-603F54193DE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51FD269A-FDE5-433D-AA47-603F54193DE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51FD269A-FDE5-433D-AA47-603F54193DE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

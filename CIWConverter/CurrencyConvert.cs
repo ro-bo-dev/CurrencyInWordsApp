@@ -1,18 +1,23 @@
-﻿using CurrencyInWordsApp.CIWConverter.Currency;
-using System;
-using System.Diagnostics;
+﻿using System;
 using System.Text;
+using System.Diagnostics;
+using CurrencyInWordsApp.CIWConverter.Currency;
+using System.Text.RegularExpressions;
 
 namespace CurrencyInWordsApp.CIWConverter
 {
     public class CurrencyConvert
     {
+        #region Properties and Constructor
         readonly ICurrency Currency;
+
+        static readonly Regex Validator = new Regex(@"^[ \d,]+$");
 
         public CurrencyConvert(CurrencyTicker.Ticker currencyTicker = CurrencyTicker.Ticker.USD)
         {
             Currency = CurrencyTicker.CurrencyByTicker[currencyTicker];
         }
+        #endregion
 
         /// <summary>
         /// Converts a money amount into words. The input has to be given as string. It must not contain any 
@@ -23,16 +28,52 @@ namespace CurrencyInWordsApp.CIWConverter
         /// <exception cref="ArgumentException"></exception>
         public string ToWords(string amount)
         {
-            if (string.IsNullOrEmpty(amount) || string.IsNullOrWhiteSpace(amount))
-            {
-                throw new ArgumentException("String of currency amount was null, empty or white spaces only");
-            }
+            Validate(ref amount);
 
             return ToWords_(amount);
         }
+
+        #region Validator and Conversion Method
+        private void Validate(ref string amount)
+        {
+            if (string.IsNullOrEmpty(amount))
+            {
+                throw new ArgumentNullException("String of currency amount was null or empty");
+            }
+            if (string.IsNullOrWhiteSpace(amount))
+            {
+                throw new ArgumentException("String of currency amount consisted of white spaces only");
+            }
+            if (!Validator.IsMatch(amount))
+            {
+                throw new ArgumentException("String of currency amount must only consist of digits, white spaces and optionally a single comma");
+            }
+            if (amount.IndexOf(',') != amount.LastIndexOf(','))
+            {
+                throw new ArgumentException("String of currency amount must not contain more than one comma");
+            }
+
+            amount = amount.Replace(" ", "");                   // remove all whitespaces
+
+            if (!amount.Contains(",") && amount.Length > 9)
+            {
+                throw new ArgumentException("String of currency amount without fraction must not have more than 9 digits");
+            }
+            if (amount.Contains(","))
+            {
+                if (amount.Length < 3 || amount.Length > 12)
+                {
+                    throw new ArgumentException("String of currency amount with fraction must not have more than 11 digits");
+                }
+                if (amount.IndexOf(',') != amount.Length - 2 && amount.IndexOf(',') != amount.Length - 3)
+                {
+                    throw new ArgumentException("String of currency amount with fraction must have either 1 or 2 digits after the comma");
+                }
+            }
+        }
+
         private string ToWords_(string amount)
         {
-            amount = amount.Replace(" ", "");                   // remove all whitespaces
             var sb = new StringBuilder();
 
             string integer = amount;
@@ -50,7 +91,9 @@ namespace CurrencyInWordsApp.CIWConverter
 
             return sb.ToString();
         }
+        #endregion
 
+        #region Block Handler
         private void HandleInteger(string integer, StringBuilder sb)
         {
             if (string.IsNullOrEmpty(integer)) return;
@@ -141,5 +184,6 @@ namespace CurrencyInWordsApp.CIWConverter
             HandleHundreds(integer, sb);
             sb.Append($" {Mappings.Million} ");
         }
+        #endregion
     }
 }

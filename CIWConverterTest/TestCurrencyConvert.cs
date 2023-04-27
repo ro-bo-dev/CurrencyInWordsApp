@@ -1,6 +1,7 @@
 ﻿using CurrencyInWordsApp.CIWConverter;
 using CurrencyInWordsApp.CIWConverter.Currency;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace CurrencyInWordsApp.CIWConverterTest.Test
 {
@@ -9,6 +10,7 @@ namespace CurrencyInWordsApp.CIWConverterTest.Test
     {
         readonly CurrencyConvert Convert = new CurrencyConvert(CurrencyTicker.Ticker.USD);
 
+        #region Test Conversion
         [TestMethod]
         public void TestAgainstSpecification()
         {
@@ -73,5 +75,64 @@ namespace CurrencyInWordsApp.CIWConverterTest.Test
             Assert.AreEqual("seven hundred seventy-seven million seven hundred seventy-seven thousand seven hundred seventy-seven dollars and seventy-seven cents", Convert.ToWords("777 777 777,77"));
             Assert.AreEqual("eight hundred eighty-eight million eight hundred eighty-eight thousand eight hundred eighty-eight dollars and eighty-eight cents", Convert.ToWords("888 888 888,88"));
         }
+        #endregion
+
+        #region Test Validation
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestArgNullException()
+        {
+            Convert.ToWords(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestArgEmptyException()
+        {
+            Convert.ToWords("");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestArgWhiteSpaceOnlyException()
+        {
+            Convert.ToWords("   ");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestArgForbiddenCharsException()
+        {
+            Convert.ToWords("354,2B");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestArgTwoCommasException()
+        {
+            Convert.ToWords("354,22,1");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestArgCommaPositionException()
+        {
+            Convert.ToWords("354,221");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestArgOverlongWithCommaException()
+        {
+            Convert.ToWords("1234567890,12");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestArgOverlongWithoutCommaException()
+        {
+            Convert.ToWords("1234567890");
+        }
+        #endregion
     }
 }

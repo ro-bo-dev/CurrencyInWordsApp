@@ -24,5 +24,17 @@ namespace CIWClientApp
         {
             InitializeComponent();
         }
+
+        private async void ConvertIntoWords_Click(object sender, RoutedEventArgs e)
+        {
+            string numericalInput = NumericalInput.Text.Trim().Replace(" ", "");
+
+            if (string.IsNullOrEmpty(numericalInput)) 
+            {
+                VerbalOutput.Text = "input format must be d[,d[d]]";
+                return;
+            }
+            VerbalOutput.Text = await RequestViaApi.RequestAsync(numericalInput);
+        }
     }
 }

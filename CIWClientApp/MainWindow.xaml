@@ -5,22 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CIWClientApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="120" Width="600">
+        Title="Currency Into Words Converter" Height="140" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <Label Grid.ColumnSpan="3" FontWeight="Bold">Currency Into Words Converter</Label>
-        <Label Grid.Row="1">Numerical Amount:</Label>
-        <TextBlock Grid.Row="1" Grid.Column="1"></TextBlock>
-        <Label Grid.Row="2">In Words:</Label>
-        <Label Grid.Row="2" Grid.Column="1">-output here-</Label>
+        <Label Grid.Row="0" Margin="5">Numerical Amount:</Label>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Name="NumericalInput"></TextBox>
+
+        <Label Grid.Row="1" Margin="5">In Words:</Label>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="5" TextWrapping="Wrap" Name="VerbalOutput">- currency in words -</TextBox>
+
+        <Label Grid.Row="2" Margin="5">Settings:</Label>
+        <Button Grid.Row="2" Grid.Column="3" Margin="5" Name="ConvertIntoWords" Click="ConvertIntoWords_Click">Convert</Button>
+        <CheckBox Grid.Row="2" Grid.Column="2" Margin="10" Name="ConvertOnTyping">Convert On Typing</CheckBox>
     </Grid>
 </Window>
