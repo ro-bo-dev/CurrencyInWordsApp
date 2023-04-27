@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CIWClientApp"
         mc:Ignorable="d"
-        Title="Currency Into Words Converter" Height="140" Width="800">
+        Title="Currency Into Words Converter" Height="180" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -17,15 +17,19 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Margin="5">Numerical Amount:</Label>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Name="NumericalInput"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Name="NumericalInput" Text="{Binding NumericalInputString, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
         <Label Grid.Row="1" Margin="5">In Words:</Label>
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="5" TextWrapping="Wrap" Name="VerbalOutput">- currency in words -</TextBox>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="5" TextWrapping="Wrap" Name="VerbalOutput" Text="{Binding VerbalOutputString, Mode=OneWay}"></TextBox>
 
         <Label Grid.Row="2" Margin="5">Settings:</Label>
-        <Button Grid.Row="2" Grid.Column="3" Margin="5" Name="ConvertIntoWords" Click="ConvertIntoWords_Click">Convert</Button>
-        <CheckBox Grid.Row="2" Grid.Column="2" Margin="10" Name="ConvertOnTyping">Convert On Typing</CheckBox>
+        <CheckBox Grid.Row="2" Grid.Column="1" Margin="10" Name="ConvertOnTyping" IsChecked="{Binding ConvertOnTyping, Mode=OneWayToSource}">Convert On Typing</CheckBox>
+
+        <Label Grid.Row="3" Margin="5">Actions:</Label>
+        <Button Grid.Row="3" Grid.Column="1" Margin="5" Name="ConvertIntoWords" Click="ConvertIntoWords_Click">Convert</Button>
+        <Button Grid.Row="3" Grid.Column="2" Margin="5" Name="CopyResult" Click="CopyResult_Click">Copy Result to Clipboard</Button>
     </Grid>
 </Window>
