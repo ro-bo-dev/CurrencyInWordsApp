@@ -5,4 +5,4 @@ Solution Structure
 - **CIWClientApp** user interface
 - **CIWConverter** conversion logic
 - **CIWConverterTest** test project for conversion logic
-- TODO **CIWServerApp** conversion service
+- **CIWServerApi** conversion api service
